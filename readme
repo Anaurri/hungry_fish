@@ -9,7 +9,7 @@ peces de diferentes tamaños y aportación.
 El jugador tiene que moverse colisionando con otros peces más pequeños para ganar puntos
  y pasar de nivel.Esa acción será la de comer.
 
-
+//ana
 Los peces del fondo marino :
     - Los peces se mueven desde el lateral izquierdo
     - Podrán comerse , al colisionar , al jugador si son de tamaño IGUAL o MAYOR 
