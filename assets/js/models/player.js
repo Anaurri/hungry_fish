@@ -39,18 +39,17 @@ class Player {
         this.toRight = true;
         this.drawCount = 0;
         /*Level's attributes*/
-        this.level = 1;
+        this.level = 2;
         /*Score's attribute*/
-        this.input = 0;
-        /*State's attribute: vivo/comiendo/muerto*/      
+        this.score = 0;
+        /*State's attribute: vivo/comiendo/muerto*/    
+        this.lose = false;  
     }
 
     isReady() {
       return this.sprite.isReady;
     }
     onKeyEvent(event) {
-      console.log("entro en el onkey")
-      console.log(event.keyCode)
 
       const state = event.type === 'keydown';
       switch (event.keyCode) {
@@ -134,6 +133,9 @@ class Player {
       }
     }
     collidesWith(element) {
-    }
-    
+      return this.x < element.x + element.width &&
+        this.x + this.width > element.x &&
+        this.y < element.y + element.height &&
+        this.y + this.height > element.y;
+    }  
 }

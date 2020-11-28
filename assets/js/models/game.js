@@ -10,7 +10,9 @@ class Game {
   
       this.background = new Background(this.ctx);
       this.player = new Player(this.ctx, this.canvas.width/2, this.canvas.height/2);
-      this.fish = [];
+      this.fish1 = new Fish1(this.ctx, this.canvas.width, this.canvas.height/2);
+      this.fish4 = new Fish4(this.ctx, this.canvas.width, this.canvas.height/2+50);
+
     }
   
     start() {
@@ -27,8 +29,6 @@ class Game {
   
     onKeyEvent(event) {
         /*onKeyEvent player*/
-        console.log("entro en el onkey game")
-
         this.player.onKeyEvent(event);
 
     }
@@ -44,8 +44,19 @@ class Game {
         /*draw background*/
         this.background.draw();
         /*draw player*/
-        this.player.draw();
+        if (!this.player.lose){
+          this.player.draw();
+        }
         /*draw all fish*/
+        if(!this.fish1.taken && this.fish1.x > 0){
+          this.fish1.draw();
+        }
+        console.log (this.fish4.x);
+        if(this.fish4.x > 0){
+          this.fish4.draw();
+        }
+        
+
         /*draw Bubbles*/
     }
   
@@ -53,6 +64,9 @@ class Game {
         /*Move player*/
         this.player.move();
         /*Move all fish*/
+        this.fish1.move();
+        this.fish4.move();
+
         /*Move Bubbles*/
     }
   
@@ -65,6 +79,36 @@ class Game {
         -      cambiar nivel --> irá progresivamente creciendo ( puede crecer más y luego bajar otra vez para hacer efecto) y con sonido
         -      ganar
         -      perder */
+        const collision1 = this.player.collidesWith(this.fish1);
+        if  (collision1){
+          if(this.player.level > this.fish1.level){
+            this.player.score += INPUT_FISH_1;
+            this.fish1.taken  = true;
+          } else {
+            this.player.lose  = true;
+          }
+        }
+        const collision4 = this.player.collidesWith(this.fish4);
+        if  (collision4){
+          if(this.player.level > this.fish4.level){
+            this.player.score += INPUT_FISH_4;
+            this.fish4.taken  = true;
+          } else {
+            this.player.lose  = true;
+          }
+        }
+
+        console.log (this.player.score);
+
+        // if (this.player.score >= SCORE_TO_WIN){
+        //   //pantalla win
+        // }else if (this.player.score >= SCORE_TO_4){
+        //   //CAMBIAMOS DE NIVEL
+        // }else if(this.player.score >= SCORE_TO_3){
+        //   //CAMBIAMOS DE NIVEL
+        // }else if(this.player.score >= SCORE_TO_2){
+        //   //CAMBIAMOS DE NIVEL
+        // }
     }
 
     stop() {
