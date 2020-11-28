@@ -1,0 +1,128 @@
+Hungry fish --> PRESENTACIÓN EL 10 DE DICIEMBRE. HECHO PARA EL 8-9
+__________________________________
+
+
+--> por si hay tiempo heaster egg ( esconder a nemo detras de unos corales)
+
+El jugador es un pez moviendose UP/DOWN/RIGTH/LEFT en un fondo marino donde hay más
+peces de diferentes tamaños y aportación. 
+El jugador tiene que moverse colisionando con otros peces más pequeños para ganar puntos
+ y pasar de nivel.Esa acción será la de comer.
+
+
+Los peces del fondo marino :
+    - Los peces se mueven desde el lateral izquierdo
+    - Podrán comerse , al colisionar , al jugador si son de tamaño IGUAL o MAYOR 
+    - Serán comidos por el player si son de menor tamaño al colisionar. (Desaparecen de la pantalla)
+    -
+
+--> Los tamaños de los peces se evalúan con NIVEL
+--> el aporte de energía se mide en INPUT
+
+------------Clase PLAYER
+--> el pez jugador. Se inicializa con NIVEL 1
+--> el player se mueve up, down, rigth, left
+
+
+INPUTS para NIVEL 2 --> 20 puntos
+INPUTS para NIVEL 3 --> 50 puntos
+INPUTS para NIVEL 4 --> 150 puntos
+INPUTS para WIN -->     220 puntos
+
+MUERE EN CUANTO LE TOQUE UN PEZ NIVEL_PEZ=> NIVEL_PLAYER
+
+métodos:
+    isReady
+    onKeyEvent 
+    draw
+    move
+    animateSprite (el movimiento de aletas etc es siempre el mismo, cambia 
+                    si vamos a izquierda o derecha (algún método espejo?))
+    collidesWith
+
+------------Clase fish . UNA CLASE PARA TODOS LOS TIPOS DE PECES , O UNA CLASE POR TIPO DE PEZ??
+
+--> los peces de la clase fish.js van a tener siempre el mismo tamaño (NIVEL)
+--> otro atributo será INPUT. Será la aportación que den al PLAYER cuando éste se los come
+--> se mueven de derecha a izquierda del canvas , en el eje X
+--> si son comidos desaparecen
+--> cuando llegan a x=0 , desaparecen
+--> se distribuyen en el eje Y aleatoriamente. Empezando en x=canvas.with
+--> los peces de igual tamaño al playes SE COMEN al player
+
+métodos:
+    isReady 
+    draw
+    move
+    animateSprite ( no depende de eventos )
+
+
+PEZ tamaño 0 --> INPUT: 2 puntos (le llamamos tamaño CERO ,porque el jugador
+                 empieza con nivel 1, y le asignamos tamaño 1 para simplificar
+                 por lo que el tamaño inferior lo denominamos CERO)
+PEZ tamaño 1 --> INPUT: 4 puntos
+PEZ tamaño 2 --> INPUT: 10 puntos
+PEZ tamaño 3 --> INPUT: 20 puntos
+PEZ tamaño 4 --> INPUT: 30 puntos
+
+Frecuencia DE PECES POR NIVEL 
+NIVEL 1:(player tamaño 1)
+PEZ tamaño 0 --> 1 pez/s
+PEZ tamaño 1 --> 1 pez/s
+PEZ tamaño 2 --> 1 pez cada 3 segundos
+PEZ tamaño 3 --> 1 pez cada 3 segundos
+PEZ tamaño 4 --> 1 pez cada 6 segundos
+
+NIVEL 2:(player tamaño 2)
+PEZ tamaño 0 --> 1 pez/s
+PEZ tamaño 1 --> 1 pez/s
+PEZ tamaño 2 --> 1 pez cada 2 segundos
+PEZ tamaño 3 --> 1 pez cada 2 segundos
+PEZ tamaño 4 --> 1 pez cada 4 segundos
+
+NIVEL 3: (player tamaño 3)
+PEZ tamaño 0 --> 1 pez cada 4 segundos
+PEZ tamaño 1 --> 1 pez cada 2 segundos
+PEZ tamaño 2 --> 1 pez/s
+PEZ tamaño 3 --> 1 pez/s
+PEZ tamaño 4 --> 1 pez cada 2 segundos
+
+NIVEL 4: (player tamaño 4)
+
+PEZ tamaño 2 --> 1 pez/s
+PEZ tamaño 3 --> 1 pez/s
+PEZ tamaño 4 --> 1 pez/s
+
+
+------------Clase background
+Rótulo e intro
+
+En principio: fondo estático    
+              burbujas: aleatorias de abajo a arriba , no es tipo sprite.
+              corales : movimiento por sprite. Están en una posición
+                        y cambian su movimiento.
+
+
+------------Clase game
+
+intro con settimeout para invocar al start?
+start
+onKeyEvent
+clear
+draw
+move
+checkCollisions
+stop lose/win
+
+
+------------DUDAS ? 
+
+2.      cada grupo de peces según su tamaño, mejor en diferente clase o todos en una :
+cambia la imagen, el input, y el nivel.
+
+3.      función o método espejo para girar el pez--> pongo frames mirando al otro lado
+
+
+4.      la colisión aqui no es igual que en MARIO. Mario las monedas están quietas, 
+        aqui tenemos que evaluar por cada movimiento del player, con la posición actual de cada pez
+        Además, hay que mirar en el eje X e Y. 
