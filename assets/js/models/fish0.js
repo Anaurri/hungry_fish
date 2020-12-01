@@ -1,4 +1,4 @@
-class Fish1 {
+class Fish0 {
 
     constructor(ctx, x, y) {
         /*Position and size's attributes*/
@@ -10,7 +10,7 @@ class Fish1 {
         this.vx = 0;   
         /*Sprite's attributes*/
         this.sprite = new Image ();
-        this.sprite.src = './img/spriteFish2.png';
+        this.sprite.src = './img/spriteFish0.png';
         this.sprite.horizontalFrames = 5;
         this.sprite.verticalFrames = 1;
         this.sprite.verticalFrameIndex = 0; /*Inicializamos en (0,0) && toRight*/
@@ -27,9 +27,9 @@ class Fish1 {
 
         this.drawCount = 0;
         /*Level's attributes*/
-        this.level = 1;
+        this.level = 0;
         /*Score's attribute*/
-        this.input = INPUT_FISH1;
+        this.input = INPUT_FISH0;
         /*State's attribute: vivo/comiendo/muerto*/      
         this.taken  = false;
 
@@ -52,8 +52,8 @@ class Fish1 {
             /*LUEGO TENGO QUE POSICIONARLO EN EL CANVAS*/
             this.x,
             this.y, 
-            this.width*FACTOR_SIZE_FISH1 ,
-            this.height*FACTOR_SIZE_FISH1 
+            this.width*FACTOR_SIZE_FISH0 ,
+            this.height*FACTOR_SIZE_FISH0
           ) 
       this.drawCount++;
       this.animate();
@@ -61,7 +61,7 @@ class Fish1 {
     }
     
     move() {
-        this.vx = -SPEED_FISH1;
+        this.vx = -SPEED_FISH0;
         // Check canvas bounds
         if (this.x <= 0) {
             //borramos pez

@@ -10,9 +10,10 @@ class Player {
         this.maxX = this.ctx.canvas.width-70;
         this.minX = 20;
         this.maxY = this.ctx.canvas.height-70;
-        this.minY = 20
+        this.minY = 20;
         this.vx = 0;   
         this.vy = 0;    
+        this.factorSize = 0.6;
         /*Sprite's attributes*/
         this.sprite = new Image ();
         this.sprite.src = './img/spritePlayer_3.png';
@@ -39,7 +40,7 @@ class Player {
         this.toRight = true;
         this.drawCount = 0;
         /*Level's attributes*/
-        this.level = 2;
+        this.level = 1;
         /*Score's attribute*/
         this.score = 0;
         /*State's attribute: vivo/comiendo/muerto*/    
@@ -86,8 +87,8 @@ class Player {
             /*LUEGO TENGO QUE POSICIONARLO EN EL CANVAS*/
             this.x,
             this.y, 
-            this.width ,
-            this.height
+            this.width*this.factorSize ,
+            this.height*this.factorSize
           ) 
       this.drawCount++;
       this.animate();

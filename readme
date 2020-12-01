@@ -63,35 +63,32 @@ PEZ tamaño 0 --> INPUT: 2 puntos (le llamamos tamaño CERO ,porque el jugador
 PEZ tamaño 1 --> INPUT: 4 puntos
 PEZ tamaño 2 --> INPUT: 10 puntos
 PEZ tamaño 3 --> INPUT: 20 puntos
-PEZ tamaño 4 --> INPUT: 30 puntos
 
-Frecuencia DE PECES POR NIVEL 
-NIVEL 1:(player tamaño 1)
-PEZ tamaño 0 --> 1 pez/s
-PEZ tamaño 1 --> 1 pez/s
-PEZ tamaño 2 --> 1 pez cada 3 segundos
-PEZ tamaño 3 --> 1 pez cada 3 segundos
-PEZ tamaño 4 --> 1 pez cada 6 segundos
+--Frecuencia DE PECES POR NIVEL. Aleatorio , pero con probabilidad. 
+Tambien se genera la posición en el canvas en el eje vertical. 
+Entre y=0 , y=canvas.heigth - (tam_pez_level_3 + 10)
 
-NIVEL 2:(player tamaño 2)
-PEZ tamaño 0 --> 1 pez/s
-PEZ tamaño 1 --> 1 pez/s
-PEZ tamaño 2 --> 1 pez cada 2 segundos
-PEZ tamaño 3 --> 1 pez cada 2 segundos
-PEZ tamaño 4 --> 1 pez cada 4 segundos
+NIVEL 1 (player tamaño 1) --> el 30% de los peces matan al player
+                          --> solo puede comer a peces de nivel 0
+PEZ tamaño 0 --> 70% 
+PEZ tamaño 1 --> 10%
+PEZ tamaño 2 --> 10%
+PEZ tamaño 3 --> 10%
 
-NIVEL 3: (player tamaño 3)
-PEZ tamaño 0 --> 1 pez cada 4 segundos
-PEZ tamaño 1 --> 1 pez cada 2 segundos
-PEZ tamaño 2 --> 1 pez/s
-PEZ tamaño 3 --> 1 pez/s
-PEZ tamaño 4 --> 1 pez cada 2 segundos
+NIVEL 2 (player tamaño 2) --> el 40% de los peces matan al player
+                          --> solo puede comer a peces de nivel 0 y 1
+PEZ tamaño 0 --> 20% 
+PEZ tamaño 1 --> 40%
+PEZ tamaño 2 --> 20%
+PEZ tamaño 3 --> 20%
 
-NIVEL 4: (player tamaño 4)
+NIVEL 3 (player tamaño 3) --> el 60% de los peces matan al player
+                          --> solo puede comer a peces de nivel 0 ,1 y 2
+PEZ tamaño 0 --> 10% 
+PEZ tamaño 1 --> 10%
+PEZ tamaño 2 --> 20%
+PEZ tamaño 3 --> 60%
 
-PEZ tamaño 2 --> 1 pez/s
-PEZ tamaño 3 --> 1 pez/s
-PEZ tamaño 4 --> 1 pez/s
 
 
 ------------Clase background
@@ -104,9 +101,9 @@ En principio: fondo estático
 
 
 ------------Clase game
-
 intro con settimeout para invocar al start?
 start
+fishGeneration con setTimeOUt ?( se guarda en un array bankOfFish)
 onKeyEvent
 clear
 draw
