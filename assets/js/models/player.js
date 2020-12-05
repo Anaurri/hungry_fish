@@ -36,17 +36,17 @@ class Player {
           down : false,
           left: false
         }
-
         this.toRight = true;
         this.drawCount = 0;
         /*Level's attributes*/
         this.level = 1;
+        this.change = false;
         /*Score's attribute*/
         this.score = 0;
         /*State's attribute: vivo/comiendo/muerto*/    
-        this.lose = false;  
-    }
+        this.lose = false; 
 
+    }
     isReady() {
       return this.sprite.isReady;
     }
@@ -125,7 +125,6 @@ class Player {
       }else if (this.y <= this.minY) {
         this.y = this.minY;
       }
-
     }
     animate() {
       if (this.drawCount % 10 === 0) {
@@ -134,9 +133,18 @@ class Player {
       }
     }
     collidesWith(element) {
-      return this.x < element.x + element.width &&
-        this.x + this.width > element.x &&
-        this.y < element.y + element.height &&
-        this.y + this.height > element.y;
-    }  
+      return this.x + this.width/1.4 < element.x + element.width &&
+        this.x + this.width/1.4 > element.x &&
+        this.y + this.height/1.4 < element.y + element.height &&
+        this.y + this.height/1.4 > element.y;
+        console.log (this.level )
+
+    } 
+    changeLevel () {
+      if (this.change){
+      this.level ++;
+      this.factorSize = this.factorSize * 1.5;
+      this.change = false;
+      }
+    } 
 }

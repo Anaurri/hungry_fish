@@ -29,8 +29,8 @@ INPUTS para NIVEL 3 --> 50 puntos
 INPUTS para NIVEL 4 --> 150 puntos
 INPUTS para WIN -->     220 puntos*/
 
-SCORE_TO_1 = 20;
-SCORE_TO_2 = 50;
-SCORE_TO_3 = 150;
-SCORE_TO_WIN = 220;
+SCORE_TO_1 = 40;
+SCORE_TO_2 = 60;
+SCORE_TO_3 = 80;
+SCORE_TO_WIN = 40;
 

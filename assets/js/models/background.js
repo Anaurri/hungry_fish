@@ -8,7 +8,7 @@ class Background {
         this.y = 0 ;
 
         this.img = new Image();
-        this.img.src = './img/fondomarino8bit4.png';
+        this.img.src = './img/deep.jpg';
         this.img.isReady = false;
 
         this.img.onload = () => { 
