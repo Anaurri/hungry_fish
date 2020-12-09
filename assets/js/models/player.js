@@ -16,9 +16,9 @@ class Player {
         this.factorSize = 0.6;
         /*Sprite's attributes*/
         this.sprite = new Image ();
-        this.sprite.src = './img/spritePlayer_3.png';
+        this.sprite.src = './img/spritePlayerb.png';
         this.sprite.horizontalFrames = 4;
-        this.sprite.verticalFrames = 2;
+        this.sprite.verticalFrames = 3;
         this.sprite.verticalFrameIndex = 0; /*Inicializamos en (0,0) && toRight*/
         this.sprite.horizontalFrameIndex = 0;
         this.sprite.isReady = false;
@@ -77,67 +77,83 @@ class Player {
     }
     draw() {
       if (this.sprite.isReady){
-        this.ctx.drawImage (             
-            /*TODO ESTO ES POSICIONAMIENTO DENTRO DE A IMAGEN SPRITE*/
-            this.sprite,
-            this.sprite.frameWidth * this.sprite.horizontalFrameIndex ,
-            this.sprite.frameHeight * this.sprite.verticalFrameIndex ,
-            this.sprite.frameWidth ,
-            this.sprite.frameHeight ,
-            /*LUEGO TENGO QUE POSICIONARLO EN EL CANVAS*/
-            this.x,
-            this.y, 
-            this.width*this.factorSize ,
-            this.height*this.factorSize
-          ) 
-      this.drawCount++;
-      this.animate();
+          this.ctx.drawImage (             
+              /*TODO ESTO ES POSICIONAMIENTO DENTRO DE A IMAGEN SPRITE*/
+              this.sprite,
+              this.sprite.frameWidth * this.sprite.horizontalFrameIndex ,
+              this.sprite.frameHeight * this.sprite.verticalFrameIndex ,
+              this.sprite.frameWidth ,
+              this.sprite.frameHeight ,
+              /*LUEGO TENGO QUE POSICIONARLO EN EL CANVAS*/
+              this.x,
+              this.y, 
+              this.width*this.factorSize ,
+              this.height*this.factorSize
+            ) 
+        this.drawCount++;
+        this.animate();
       }
     }
     
     move() {
-      if (this.movements.right) {
-        this.vx = SPEED;
-      } else if (this.movements.left) {
-        this.vx = -SPEED;
-      } else {
-        this.vx = 0;
-      }
-      if (this.movements.up) {
-        this.vy = -SPEED;
-      } else if (this.movements.down) {
-        this.vy = SPEED;
-      } else {
-        this.vy = 0;
-      }
-      this.x += this.vx;
-      this.y += this.vy;
+      if (!this.lose){
+        if (this.movements.right) {
+          this.vx = SPEED;
+        } else if (this.movements.left) {
+          this.vx = -SPEED;
+        } else {
+          this.vx = 0;
+        }
+        if (this.movements.up) {
+          this.vy = -SPEED;
+        } else if (this.movements.down) {
+          this.vy = SPEED;
+        } else {
+          this.vy = 0;
+        }
+        this.x += this.vx;
+        this.y += this.vy;
 
 
-      // Check canvas bounds
-      if (this.x >= this.maxX) {
-        this.x = this.maxX;
-      } else if (this.x <= this.minX) {
-        this.x = this.minX;
-      }
-      if (this.y >= this.maxY) {
-        this.y = this.maxY;
-      }else if (this.y <= this.minY) {
-        this.y = this.minY;
+        // Check canvas bounds
+        if (this.x >= this.maxX) {
+          this.x = this.maxX;
+        } else if (this.x <= this.minX) {
+          this.x = this.minX;
+        }
+        if (this.y >= this.maxY) {
+          this.y = this.maxY;
+        }else if (this.y <= this.minY) {
+          this.y = this.minY;
+        }
+      } else {
+        /*El player ha perdido*/
+        if (this.y >= this.maxY) {
+          this.y = this.maxY;
+        } else {
+          this.vy = SPEED ;
+          this.y += this.vy;
+        }
+
       }
     }
     animate() {
       if (this.drawCount % 10 === 0) {
+        if (!this.lose){
         this.sprite.horizontalFrameIndex = (this.sprite.horizontalFrameIndex + 1) % this.sprite.horizontalFrames;
+        } else {
+          this.sprite.verticalFrameIndex = 2;
+          this.sprite.horizontalFrameIndex = 0;
+        }
         this.drawCount = 0;
       }
+
     }
     collidesWith(element) {
       return this.x + this.width/1.4 < element.x + element.width &&
         this.x + this.width/1.4 > element.x &&
         this.y + this.height/1.4 < element.y + element.height &&
         this.y + this.height/1.4 > element.y;
-        console.log (this.level )
 
     } 
     changeLevel () {

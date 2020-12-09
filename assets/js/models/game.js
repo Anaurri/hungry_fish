@@ -1,8 +1,8 @@
 class Game {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
-    this.canvas.height = 500;
-    this.canvas.width = 1000;
+    this.canvas.height = 400;
+    this.canvas.width = 600;
     this.ctx = this.canvas.getContext('2d');
 
     this.fps = 1000 / 60;
@@ -37,8 +37,10 @@ class Game {
     if (!this.newFishIntervalId) {
       this.newFishIntervalId = setInterval(() => {
         /*Random position Y axis. (98 es la altura del pez más grande)*/
-        const maxY = this.canvas.height - (98 + 10);
-        const yAxis = Math.floor(Math.random() * maxY);
+        const maxY = this.canvas.height - (98 + 110);
+        /*El 50que sumamos de más es para la parte de arriba , para q no moleste al marcador*/
+        const yAxis = (Math.floor(Math.random() * maxY))+50;
+        
 
         /*Random type of fish. Números entre 0 y 9*/
         const auxType = Math.floor(Math.random() * 10);
@@ -67,7 +69,7 @@ class Game {
             case 3, 4, 5, 6:
               this.fish = new Fish1(this.ctx, this.canvas.width, yAxis);
               break;
-            case 7, 8:
+            case 7, 8 ,9:
               this.fish = new Fish2(this.ctx, this.canvas.width, yAxis);
               break;
             default:
@@ -83,7 +85,7 @@ class Game {
             case 2:
               this.fish = new Fish1(this.ctx, this.canvas.width, yAxis);
               break;
-            case 3, 4:
+            case 3, 4 , 5:
               this.fish = new Fish2(this.ctx, this.canvas.width, yAxis);
               break;
             default:
@@ -111,8 +113,10 @@ class Game {
     /*draw background*/
     this.background.draw();
     /*draw player*/
-    if (!this.player.lose) {
+  
       this.player.draw();
+     if (this.player.y === this.player.maxY && this.player.lose) {
+      this.stop ();
     }
     /*draw all fish*/
     for (const fish of this.bankOfFish) {
@@ -120,6 +124,8 @@ class Game {
         fish.draw();
       }
     }
+    // this.drawScore();
+
 
     /*draw Bubbles*/
   }
@@ -149,16 +155,15 @@ class Game {
         if (this.player.level > fish.level) {
           this.player.score += fish.input;
           fish.taken = true;
-          // if (this.player.score >= SCORE_TO_WIN){
-          //   //pantalla win
-          // }else */
-          if (this.player.score === SCORE_TO_3) {
+
+          if ((this.player.score >= SCORE_TO_2 && this.player.level === 1) ||
+             (this.player.score >= SCORE_TO_3 && this.player.level === 2) ||
+             (this.player.score >= SCORE_TO_WIN && this.player.level === 3))
+          {
             this.player.change = true;
             this.player.changeLevel();
-          } else if (this.player.score === SCORE_TO_2) {
-            this.player.change = true;
-            this.player.changeLevel();
-          }
+            console.log ("a level 2");
+          } 
         } else {
           this.player.lose = true;
         }
@@ -170,23 +175,17 @@ class Game {
     // }else */
 
   }
-  /*Borramos del arrays los peces que hayan llegado a x=0 y los que hayan sido comidos*/
-  // removeFish (){
-  //   // this.restOfFish = this.bankOfFish.filter(fish => (!fish.taken || fish.x > 0));
-  //   for (const fish of this.bankOfFish){
-  //     if(!fish.taken && fish.x > 0){
-  //       this.restOfFish
-  //     } 
-  //   } 
 
-  //   this.bankOfFish = this.restOfFish;
-  //   console.log(this.bankOfFish);
-  // }
-
+  drawScore() {
+    const score= product.querySelector(".score");
+    score.innerText = this.player.score;
+  }
+ 
   stop() {
     /*LOSE/WIN*/
     clearInterval(this.drawIntervalId);
     this.drawIntervalId = undefined;
+     
   }
 
 }
