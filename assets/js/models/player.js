@@ -150,8 +150,8 @@ class Player {
 
     }
     collidesWith(element) {
-      return this.x + this.width/1.4 < element.x + element.width &&
-        this.x + this.width/1.4 > element.x &&
+      return this.x + this.width < element.x + element.width &&
+        this.x + this.width > element.x &&
         this.y + this.height/1.4 < element.y + element.height &&
         this.y + this.height/1.4 > element.y;
 

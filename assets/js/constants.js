@@ -15,8 +15,8 @@ const FACTOR_SIZE_FISH1 = 0.6;
 const INPUT_FISH1 = 20;
 
 const SPEED_FISH2 = 3.5;
-const FACTOR_SIZE_FISH2 = 0.9;
-const INPUT_FISH2= 30;
+const FACTOR_SIZE_FISH2 = 1.3;
+const INPUT_FISH2= 40;
 
 const SPEED_FISH3 = 3;
 const FACTOR_SIZE_FISH3 = 0.7;
@@ -30,6 +30,6 @@ INPUTS para NIVEL 4 --> 150 puntos
 INPUTS para WIN -->     220 puntos*/
 
 SCORE_TO_2 = 60;
-SCORE_TO_3 = 150;
-SCORE_TO_WIN = 300;
+SCORE_TO_3 = 120;
+SCORE_TO_WIN = 200;
 

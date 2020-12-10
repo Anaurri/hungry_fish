@@ -13,7 +13,7 @@ class Fish {
         this.sprite = new Image ();
         this.sprite.horizontalFrames = 5;
         this.sprite.verticalFrames = 1;
-        this.sprite.verticalFrameIndex = 0; /*Inicializamos en (0,0) && toRight*/
+        this.sprite.verticalFrameIndex = 0; 
         this.sprite.horizontalFrameIndex = 0;
         this.sprite.isReady = false;
         this.sprite.onload = () => {
